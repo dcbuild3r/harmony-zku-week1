@@ -8,8 +8,19 @@ template RangeProof(n) {
     signal input range[2]; // the two elements should be the range, i.e. [lower bound, upper bound]
     signal output out;
 
-    component low = LessEqThan(n);
-    component high = GreaterEqThan(n);
+    component low = GreaterEqThan(n);
+    component high = LessEqThan(n);
 
     // [assignment] insert your code here
+    
+    // Lower boundary
+    low.in[0] <==  in;
+    low.in[1] <== range[0];
+
+    // Upper boundary
+    high.in[0] <== in;
+    high.in[1] <== range[1];
+
+    out <== low.out * high.out;
 }
+
